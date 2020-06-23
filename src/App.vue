@@ -108,6 +108,27 @@
 						{ icon: 'mdi-circle-medium', text: 'Kanji N1', action: '/kanji/kanji-n1'},
 					],
 				},
+				{
+					icon: 'mdi-chevron-up',
+					'icon-alt': 'mdi-chevron-down',
+					text: 'Dictionary',
+					model: false,
+					children: [
+						{ icon: 'mdi-circle-medium', text: 'List of Words', action: '/dictionary/list-of-words'},
+						{ icon: 'mdi-circle-medium', text: 'List of Words has Kanji', action: '/dictionary/has-kanji'},
+						{ icon: 'mdi-circle-medium', text: 'Practice', action: '/dictionary/practice'},
+					],
+				},
+				{
+					icon: 'mdi-chevron-up',
+					'icon-alt': 'mdi-chevron-down',
+					text: 'Quiz',
+					model: false,
+					children: [
+						{ icon: 'mdi-circle-medium', text: 'Hiragana - Katakana', action: '/quiz/hiragana-katakana'},
+						{ icon: 'mdi-circle-medium', text: 'Vocabulary', action: '/quiz/vocabulary'},
+					],
+				},
 			],
 		}),
 	};

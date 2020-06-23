@@ -82,6 +82,35 @@ const routes = [
 				component: () => import( /*webpackChunkName: "about"*/ '../views/Kanji/KanjiN5.vue')
 			},
 			//=== END ROUTE KANJI ===============================================================================
+			//=== BEGIN DICTIONARY ==============================================================================
+			{
+				path: 'dictionary/list-of-words',
+				name: 'Dictionnary',
+				component: () => import( /*webpackChunkName: "ListOfWords"*/ '../views/Dictionary/ListOfWords.vue')
+			},
+			{
+				path: 'dictionary/has-kanji',
+				name: 'Has-Kanji',
+				component: () => import( /*webpackChunkName: "Practice"*/ '../views/Dictionary/HasKanji.vue')
+			},
+			{
+				path: 'dictionary/practice',
+				name: 'Practice',
+				component: () => import( /*webpackChunkName: "Practice"*/ '../views/Dictionary/Practice.vue')
+			},
+			//=== END DICTIONARY ================================================================================
+			//=== BEGIN QUIZ ====================================================================================
+			{
+				path: 'quiz/hiragana-katakana',
+				name: 'Dictionnary',
+				component: () => import( /*webpackChunkName: "HiraganaKatakana"*/ '../views/Quiz/HiraganaKatakana.vue')
+			},
+			{
+				path: 'quiz/vocabulary',
+				name: 'Has-Kanji',
+				component: () => import( /*webpackChunkName: "Vocabulary"*/ '../views/Quiz/Vocabulary.vue')
+			},
+			//=== END QUIZ ======================================================================================
 		]
 	},
 ]

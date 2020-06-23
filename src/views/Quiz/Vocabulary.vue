@@ -5,31 +5,18 @@
 			<v-divider class="mx-4" />
 			<v-card-text class="mb-n4" v-if="!state.start">
 				<v-row>
-					<v-col cols="4">
+					<v-col cols="6">
 						<v-select dense v-model="state.qty" :items="state.qtyItem" :rules="[v => !!v || 'Number of Question is required']" label="Number of Question" required></v-select>
 					</v-col>
-					<v-col cols="4">
+					<v-col cols="6">
 						<v-select dense v-model="state.timer" :items="state.timerItem" :rules="[v => !!v || 'Timer is required']" label="Timer" required></v-select>
-					</v-col>
-					<v-col cols="2">
-						<v-btn small block color="primary" dark @click="selectAll">{{text.button1}}</v-btn>
-					</v-col>
-					<v-col cols="2">
-						<v-btn small block color="secondary" dark @click="clearAll">{{text.button2}}</v-btn>
-					</v-col>
-					<v-col cols="12" class="mt-n12">
-						<v-row>
-							<v-col cols="3" v-for="(item, i) in hiragana" :key="i" class="mb-n8">
-								<v-checkbox v-model="selected" :label="word(item)" :value="`${i}`" color="success"></v-checkbox>
-							</v-col>
-						</v-row>
 					</v-col>
 				</v-row>
 			</v-card-text>
 			<v-card-text v-if="state.start">
 				<v-container id="scroll-target" style="max-height: 550px" class="overflow-y-auto">
 				<v-row v-scroll:#scroll-target="onScroll" align="center" justify="center" style="height: 400px">
-					<v-col cols="6" v-for="(item, i) in hiraganas" :key="i" class="mb-n4">
+					<v-col cols="6" v-for="(item, i) in words" :key="i" class="mb-n4">
 						<v-row>
 							<v-col cols="4" class="mt-1">
 								<h2>{{item}}</h2>
@@ -79,7 +66,6 @@
 		},
 		data: () => ({
 			switch1: true,
-			selected: [],
 			state: {
 				start: false,
 				finish: false,
@@ -90,15 +76,13 @@
 				timerItem: ['1 Minutes', '5 Minutes', '10 Minutes', '15 Minutes', '20 Minutes', '25 Minutes', '30 Minutes']
 			},
 			text: {
-				title: 'Hiragana to Romaji',
+				title: 'Hiragana + Katakana to Romaji',
 				title2: 'Evaluation',
-				button1: 'Select All',
-				button2: 'Clear All',
 				button3: 'Start',
 				button4: 'Check',
 				button5: 'Reload',
 			},
-			hiraganas: [],
+			words: [],
 			romajis: [],
 			answer: []
 		}),
@@ -108,6 +92,8 @@
 			...mapGetters({
 				hiragana: 'letters/getHiragana',
 				hiraganaIndex: 'letters/getHiraganaIndex',
+				katakana: 'letters/getKatakana',
+				katakanaIndex: 'letters/getKatakanaIndex',
 			}),
 			scoreColor() {
 				if(this.score >= 75) return 'success--text'
@@ -115,17 +101,23 @@
 				else return 'red--text'
 			},
 			score() {
-				return this.state.trueAns / this.hiraganas.length * 100
+				return this.state.trueAns / this.words.length * 100
 			},
 			totalAns() {
-				return this.hiraganas.length
+				return this.words.length
 			},
 			intro() {
-				return (this.state.timer && this.state.qty && this.selected.length > 0)
+				return (this.state.timer && this.state.qty)
 			},
 			checkAns() {
-				if(this.state.start) return (this.answer.length == this.hiraganas.length)
+				if(this.state.start) return (this.answer.length == this.words.length)
 				return true
+			},
+			allLetters() {
+				var all = []
+				all = all.concat(this.hiragana)
+				all = all.concat(this.katakana)
+				return all
 			}
 		},
 		methods: {
@@ -136,19 +128,23 @@
 				this.state.start = !this.state.start
 				this.text.button3 = "Check"
 				var temp = []
-				for (var i = 0; i < this.selected.length; i++) {
-					temp = temp.concat(this.hiraganaIndex(this.selected[i]))
+				for (var h = 0; h < this.hiragana.length; h++) {
+					temp = temp.concat(this.hiraganaIndex(h))
+				} 
+				for (var i = 0; i < this.katakana.length; i++) {
+					temp = temp.concat(this.katakanaIndex(i))
 				} 
 				for (var j = 0; j < this.state.qty; j++) {
-					var hiragana_sentence = ""
+					var word_sentence = ""
 					var romaji_sentence = ""
 					var rand = Math.floor(Math.random() * (5 - 3 + 1) ) + 3
 					for (var k = 0; k < rand; k++) {
 						var idx = Math.floor(Math.random() * (temp.length));
-						hiragana_sentence = hiragana_sentence.concat(temp[idx].hiragana)
+						if(temp[idx].hiragana) word_sentence = word_sentence.concat(temp[idx].hiragana)
+						else if(temp[idx].katakana) word_sentence = word_sentence.concat(temp[idx].katakana)
 						romaji_sentence = romaji_sentence.concat(temp[idx].romaji)
 					}
-					this.hiraganas = this.hiraganas.concat(hiragana_sentence)
+					this.words = this.words.concat(word_sentence)
 					this.romajis = this.romajis.concat(romaji_sentence)
 				}
 			},
@@ -159,7 +155,7 @@
 				} 
 			},
 			reload() {
-				this.hiraganas = []
+				this.words = []
 				this.romajis = []
 				this.selected = []
 				this.answer = []
@@ -182,21 +178,13 @@
 				}
 				return ''
 			},
-			selectAll () {
-				this.selected = []
-				for (var i = 0; i < this.hiragana.length; i++) {
-					this.selected.push(i.toString())
-				} 
-			},
 			word(item) {
 				var letters = ''
 				for(let i = 0; i < item.length; i++) {
-					letters += item[i].hiragana + ' '
+					if(item[i].hiragana) letters += item[i].hiragana + ' '
+					else if(item[i].katakana) letters += item[i].katakana + ' '
 				}
 				return letters
-			},
-			clearAll() {
-				this.selected = []
 			},
 			onScroll() {
 			}

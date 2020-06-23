@@ -20,7 +20,7 @@
 					<v-col cols="12" class="mt-n12">
 						<v-row>
 							<v-col cols="3" v-for="(item, i) in katakana" :key="i" class="mb-n8">
-								<v-checkbox v-model="selected" :label="`${item}`" :value="`${i}`" color="success"></v-checkbox>
+								<v-checkbox v-model="selected" :label="word(item)" :value="`${i}`" color="success"></v-checkbox>
 							</v-col>
 						</v-row>
 					</v-col>
@@ -43,10 +43,13 @@
 				</v-container>
 			</v-card-text>
 			<v-card-actions>
-				<v-btn block color="success" @click="check" :disabled="!intro">{{text.button3}}</v-btn>
+				<v-btn block color="success" @click="start" v-if="!state.start" :disabled="!intro">{{text.button3}}</v-btn>
 			</v-card-actions>
 			<v-card-actions>
-				<v-btn block color="secondary" @click="reload" v-if="state.start">{{text.button4}}</v-btn>
+				<v-btn block color="success" @click="check" v-if="state.start && !state.finish" :disabled="!checkAns">{{text.button4}}</v-btn>
+			</v-card-actions>
+			<v-card-actions>
+				<v-btn block color="secondary" @click="reload" v-if="state.start">{{text.button5}}</v-btn>
 			</v-card-actions>
 		</v-card>
 		<v-card outlined v-if="state.finish" class="mt-5">
@@ -92,7 +95,8 @@
 				button1: 'Select All',
 				button2: 'Clear All',
 				button3: 'Start',
-				button4: 'Reload',
+				button4: 'Check',
+				button5: 'Reload',
 			},
 			katakanas: [],
 			romajis: [],
@@ -104,8 +108,6 @@
 			...mapGetters({
 				katakana: 'letters/getKatakana',
 				katakanaIndex: 'letters/getKatakanaIndex',
-				romaji: 'letters/getRomaji',
-				romajiIndex: 'letters/getRomajiIndex'
 			}),
 			scoreColor() {
 				if(this.score >= 75) return 'success--text'
@@ -120,40 +122,41 @@
 			},
 			intro() {
 				return (this.state.timer && this.state.qty && this.selected.length > 0)
+			},
+			checkAns() {
+				if(this.state.start) return (this.answer.length == this.katakanas.length)
+				return true
 			}
 		},
 		methods: {
 			...mapActions({
 				setAlert: 'alert/set'
 			}),
-			check() {
-				if(this.state.start) {
-					this.state.finish = !this.state.finish
-					for (var x = 0; x < this.romajis.length; x++) {
-						if(this.romajis[x] == this.answer[x]) this.state.trueAns++
-					} 
-				} else {
-					this.state.start = !this.state.start
-					this.text.button3 = "Check"
-					var temp = []
-					var temp2 = []
-					for (var i = 0; i < this.selected.length; i++) {
-						temp = temp.concat(this.katakanaIndex(this.selected[i]))
-						temp2 = temp2.concat(this.romajiIndex(this.selected[i]))
-					} 
-					for (var j = 0; j < this.state.qty; j++) {
-						var katakana_sentence = ""
-						var romaji_sentence = ""
-						var rand = Math.floor(Math.random() * (5 - 3 + 1) ) + 3
-						for (var k = 0; k < rand; k++) {
-							var idx = Math.floor(Math.random() * (temp.length));
-							katakana_sentence = katakana_sentence.concat(temp[idx])
-							romaji_sentence = romaji_sentence.concat(temp2[idx])
-						}
-						this.katakanas = this.katakanas.concat(katakana_sentence)
-						this.romajis = this.romajis.concat(romaji_sentence)
+			start() {
+				this.state.start = !this.state.start
+				this.text.button3 = "Check"
+				var temp = []
+				for (var i = 0; i < this.selected.length; i++) {
+					temp = temp.concat(this.katakanaIndex(this.selected[i]))
+				} 
+				for (var j = 0; j < this.state.qty; j++) {
+					var katakana_sentence = ""
+					var romaji_sentence = ""
+					var rand = Math.floor(Math.random() * (5 - 3 + 1) ) + 3
+					for (var k = 0; k < rand; k++) {
+						var idx = Math.floor(Math.random() * (temp.length));
+						katakana_sentence = katakana_sentence.concat(temp[idx].katakana)
+						romaji_sentence = romaji_sentence.concat(temp[idx].romaji)
 					}
+					this.katakanas = this.katakanas.concat(katakana_sentence)
+					this.romajis = this.romajis.concat(romaji_sentence)
 				}
+			},
+			check() {
+				this.state.finish = !this.state.finish
+				for (var x = 0; x < this.romajis.length; x++) {
+					if(this.romajis[x].toLowerCase() == this.answer[x].toLowerCase()) this.state.trueAns++
+				} 
 			},
 			reload() {
 				this.katakanas = []
@@ -165,17 +168,17 @@
 				this.text.button3 = "Start"
 				this.state.trueAns = 0
 				this.state.start = !this.state.start
-				this.state.finish = !this.state.finish
+				if(this.state.finish) this.state.finish = !this.state.finish
 			},
 			checkSuccess(i) {
 				if(this.state.finish) {
-					if(this.romajis[i] == this.answer[i]) return this.romajis[i]
+					if(this.romajis[i].toLowerCase() == this.answer[i].toLowerCase()) return this.romajis[i]
 				}
 				return ''
 			},
 			checkError(i) {
 				if(this.state.finish) {
-					if(this.romajis[i] != this.answer[i]) return this.romajis[i]
+					if(this.romajis[i].toLowerCase() != this.answer[i].toLowerCase()) return this.romajis[i]
 				}
 				return ''
 			},
@@ -184,6 +187,13 @@
 				for (var i = 0; i < this.katakana.length; i++) {
 					this.selected.push(i.toString())
 				} 
+			},
+			word(item) {
+				var letters = ''
+				for(let i = 0; i < item.length; i++) {
+					letters += item[i].katakana + ' '
+				}
+				return letters
 			},
 			clearAll() {
 				this.selected = []

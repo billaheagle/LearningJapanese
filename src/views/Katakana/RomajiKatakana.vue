@@ -19,8 +19,8 @@
 					</v-col>
 					<v-col cols="12" class="mt-n12">
 						<v-row>
-							<v-col cols="3" v-for="(item, i) in romaji" :key="i" class="mb-n8">
-								<v-checkbox v-model="selected" :label="`${item}`" :value="`${i}`" color="success"></v-checkbox>
+							<v-col cols="3" v-for="(item, i) in katakana" :key="i" class="mb-n8">
+								<v-checkbox v-model="selected" :label="word(item)" :value="`${i}`" color="success"></v-checkbox>
 							</v-col>
 						</v-row>
 					</v-col>
@@ -125,10 +125,8 @@
 					this.state.start = !this.state.start
 					this.text.button3 = "Check"
 					var temp = []
-					var temp2 = []
 					for (var i = 0; i < this.selected.length; i++) {
 						temp = temp.concat(this.katakanaIndex(this.selected[i]))
-						temp2 = temp2.concat(this.romajiIndex(this.selected[i]))
 					} 
 					for (var j = 0; j < this.state.qty; j++) {
 						var katakana_sentence = ""
@@ -136,8 +134,8 @@
 						var rand = Math.floor(Math.random() * (5 - 3 + 1) ) + 3
 						for (var k = 0; k < rand; k++) {
 							var idx = Math.floor(Math.random() * (temp.length));
-							katakana_sentence = katakana_sentence.concat(temp[idx])
-							romaji_sentence = romaji_sentence.concat(temp2[idx] + ' ')
+							katakana_sentence = katakana_sentence.concat(temp[idx].katakana)
+							romaji_sentence = romaji_sentence.concat(temp[idx].romaji + ' ')
 						}
 						this.katakanas = this.katakanas.concat(katakana_sentence)
 						this.romajis = this.romajis.concat(romaji_sentence)
@@ -165,6 +163,13 @@
 				for (var i = 0; i < this.katakana.length; i++) {
 					this.selected.push(i.toString())
 				} 
+			},
+			word(item) {
+				var letters = ''
+				for(let i = 0; i < item.length; i++) {
+					letters += item[i].romaji + ' '
+				}
+				return letters
 			},
 			clearAll() {
 				this.selected = []

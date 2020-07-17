@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<v-card outlined>
-			<v-card-title><h2>{{text.title}}</h2></v-card-title>
+			<v-card-title><h2>{{text.title}} ({{dictLength}})</h2></v-card-title>
 			<v-card-text class="mb-n4" v-if="state.start">
 				<v-row>
 					<v-col cols="3" v-for="(item, i) in dictionary" :key="i">
@@ -16,14 +16,14 @@
 					</v-col>
 				</v-row>
 			</v-card-text>
-			<v-card-actions>
-				<v-btn block color="success" @click="start" v-if="!state.start">{{text.button}}</v-btn>
+			<v-card-actions v-if="!state.start">
+				<v-btn block color="success" @click="start">{{text.button}}</v-btn>
 			</v-card-actions>
-			<v-card-actions>
-				<v-btn block color="success" @click="check" v-if="state.start && !state.finish" :disabled="!checkAns">{{text.button2}}</v-btn>
+			<v-card-actions v-if="state.start && !state.finish">
+				<v-btn block color="success" @click="check" :disabled="!checkAns">{{text.button2}}</v-btn>
 			</v-card-actions>
-			<v-card-actions>
-				<v-btn block color="secondary" @click="reload" v-if="state.start">{{text.button3}}</v-btn>
+			<v-card-actions v-if="state.start">
+				<v-btn block color="secondary" @click="reload">{{text.button3}}</v-btn>
 			</v-card-actions>
 		</v-card>
 		<v-card outlined v-if="state.finish" class="mt-5">
@@ -69,9 +69,10 @@
 		computed: {
 			...mapGetters({
 				dict: 'words/getDictionary',
+				dictLength: 'words/getDictionaryLength',
 			}),
 			score() {
-				return this.state.trueAns / this.dictionary.length * 100
+				return Math.round(this.state.trueAns / this.dictionary.length * 100)
 			},
 			scoreColor() {
 				if(this.score >= 75) return 'success--text'

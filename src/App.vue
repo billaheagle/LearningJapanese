@@ -94,7 +94,7 @@
 						{ icon: 'mdi-circle-medium', text: 'Romaji to Katakana', action: '/katakana/romaji-katakana'},
 					],
 				},
-				{
+				/*{
 					icon: 'mdi-chevron-up',
 					'icon-alt': 'mdi-chevron-down',
 					text: 'Kanji',
@@ -107,7 +107,7 @@
 						{ icon: 'mdi-circle-medium', text: 'Kanji N2', action: '/kanji/kanji-n2'},
 						{ icon: 'mdi-circle-medium', text: 'Kanji N1', action: '/kanji/kanji-n1'},
 					],
-				},
+				},*/
 				{
 					icon: 'mdi-chevron-up',
 					'icon-alt': 'mdi-chevron-down',
@@ -115,8 +115,8 @@
 					model: false,
 					children: [
 						{ icon: 'mdi-circle-medium', text: 'List of Words', action: '/dictionary/list-of-words'},
+						{ icon: 'mdi-circle-medium', text: 'New Words', action: '/dictionary/new-words'},
 						{ icon: 'mdi-circle-medium', text: 'List of Words has Kanji', action: '/dictionary/has-kanji'},
-						{ icon: 'mdi-circle-medium', text: 'Practice', action: '/dictionary/practice'},
 					],
 				},
 				{
@@ -125,8 +125,11 @@
 					text: 'Quiz',
 					model: false,
 					children: [
-						{ icon: 'mdi-circle-medium', text: 'Hiragana - Katakana', action: '/quiz/hiragana-katakana'},
-						{ icon: 'mdi-circle-medium', text: 'Vocabulary', action: '/quiz/vocabulary'},
+						{ icon: 'mdi-circle-medium', text: 'Number', action: '/quiz/number'},
+						{ icon: 'mdi-circle-medium', text: 'Practice Words', action: '/quiz/practice-words'},
+						{ icon: 'mdi-circle-medium', text: 'Practice New Words', action: '/quiz/practice-new-words'},
+						//{ icon: 'mdi-circle-medium', text: 'Hiragana - Katakana', action: '/quiz/hiragana-katakana'},
+						//{ icon: 'mdi-circle-medium', text: 'Vocabulary', action: '/quiz/vocabulary'},
 					],
 				},
 			],

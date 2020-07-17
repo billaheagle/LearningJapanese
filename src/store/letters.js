@@ -34,7 +34,7 @@ export default {
 		katakana: [
 			[{katakana: 'ア', romaji: 'a'}, {katakana: 'イ', romaji: 'i'}, {katakana: 'ウ', romaji: 'u'}, {katakana: 'エ', romaji: 'e'}, {katakana: 'オ', romaji: 'o'}],
 			[{katakana: 'カ', romaji: 'ka'}, {katakana: 'キ', romaji: 'ki'}, {katakana: 'ク', romaji: 'ku'}, {katakana: 'ケ', romaji: 'ke'}, {katakana: 'コ', romaji: 'ko'}],
-			[{katakana: 'サ', romaji: 'sa'}, {katakana: 'シ', romaji: 'shi'}, {katakana: 'シ', romaji: 'su'}, {katakana: 'セ', romaji: 'se'}, {katakana: 'ソ', romaji: 'so'}],
+			[{katakana: 'サ', romaji: 'sa'}, {katakana: 'シ', romaji: 'shi'}, {katakana: 'ス', romaji: 'su'}, {katakana: 'セ', romaji: 'se'}, {katakana: 'ソ', romaji: 'so'}],
 			[{katakana: 'タ', romaji: 'ta'}, {katakana: 'チ', romaji: 'chi'}, {katakana: 'ツ', romaji: 'tsu'}, {katakana: 'テ', romaji: 'te'}, {katakana: 'ト', romaji: 'to'}],
 			[{katakana: 'ナ', romaji: 'na'}, {katakana: 'ニ', romaji: 'ni'}, {katakana: 'ヌ', romaji: 'nu'}, {katakana: 'ネ', romaji: 'ne'}, {katakana: 'ノ', romaji: 'no'}],
 			[{katakana: 'ハ', romaji: 'ha'}, {katakana: 'ヒ', romaji: 'hi'}, {katakana: 'フ', romaji: 'fu'}, {katakana: 'ヘ', romaji: 'he'}, {katakana: 'ホ', romaji: 'ho'}],

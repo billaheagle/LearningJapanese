@@ -94,12 +94,27 @@ const routes = [
 				component: () => import( /*webpackChunkName: "Practice"*/ '../views/Dictionary/HasKanji.vue')
 			},
 			{
-				path: 'dictionary/practice',
-				name: 'Practice',
-				component: () => import( /*webpackChunkName: "Practice"*/ '../views/Dictionary/Practice.vue')
+				path: 'dictionary/new-words',
+				name: 'New-Words',
+				component: () => import( /*webpackChunkName: "NewWords"*/ '../views/Dictionary/NewWords.vue')
 			},
 			//=== END DICTIONARY ================================================================================
 			//=== BEGIN QUIZ ====================================================================================
+			{
+				path: 'quiz/number',
+				name: 'Number',
+				component: () => import( /*webpackChunkName: "Number"*/ '../views/Quiz/Number.vue')
+			},
+			{
+				path: 'quiz/practice-words',
+				name: 'Practice Words',
+				component: () => import( /*webpackChunkName: "Practice"*/ '../views/Quiz/PracticeWords.vue')
+			},
+			{
+				path: 'quiz/practice-new-words',
+				name: 'Practice New Words',
+				component: () => import( /*webpackChunkName: "Practice"*/ '../views/Quiz/PracticeNewWords.vue')
+			},
 			{
 				path: 'quiz/hiragana-katakana',
 				name: 'Dictionnary',

@@ -116,6 +116,11 @@ const routes = [
 				component: () => import( /*webpackChunkName: "Practice"*/ '../views/Quiz/PracticeNewWords.vue')
 			},
 			{
+				path: 'quiz/step-by-step-words',
+				name: 'Practice New Words',
+				component: () => import( /*webpackChunkName: "Practice"*/ '../views/Quiz/StepByStepWords.vue')
+			},
+			{
 				path: 'quiz/hiragana-katakana',
 				name: 'Dictionnary',
 				component: () => import( /*webpackChunkName: "HiraganaKatakana"*/ '../views/Quiz/HiraganaKatakana.vue')

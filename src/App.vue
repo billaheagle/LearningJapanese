@@ -128,6 +128,7 @@
 						{ icon: 'mdi-circle-medium', text: 'Number', action: '/quiz/number'},
 						{ icon: 'mdi-circle-medium', text: 'Practice Words', action: '/quiz/practice-words'},
 						{ icon: 'mdi-circle-medium', text: 'Practice New Words', action: '/quiz/practice-new-words'},
+						{ icon: 'mdi-circle-medium', text: 'Step by Step Words', action: '/quiz/step-by-step-words'},
 						//{ icon: 'mdi-circle-medium', text: 'Hiragana - Katakana', action: '/quiz/hiragana-katakana'},
 						//{ icon: 'mdi-circle-medium', text: 'Vocabulary', action: '/quiz/vocabulary'},
 					],

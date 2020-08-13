@@ -50,85 +50,107 @@ const routes = [
 				component: () => import( /*webpackChunkName: "about"*/ '../views/Katakana/RomajiKatakana.vue')
 			},
 			//=== END ROUTE KATAKANA ============================================================================
-			//=== BEGIN ROUTE KANJI =============================================================================
+			//=== BEGIN DICTIONARY N5 ==============================================================================
 			{
-				path: 'kanji/basic-kanji',
-				name: 'Basic-Kanji',
-				component: () => import( /*webpackChunkName: "about"*/ '../views/Kanji/BasicKanji.vue')
-			},
-			{
-				path: 'kanji/kanji-n1',
-				name: 'Kanji-N1',
-				component: () => import( /*webpackChunkName: "about"*/ '../views/Kanji/KanjiN1.vue')
-			},
-			{
-				path: 'kanji/kanji-n2',
-				name: 'Kanji-N2',
-				component: () => import( /*webpackChunkName: "about"*/ '../views/Kanji/KanjiN2.vue')
-			},
-			{
-				path: 'kanji/kanji-n3',
-				name: 'Kanji-N3',
-				component: () => import( /*webpackChunkName: "about"*/ '../views/Kanji/KanjiN3.vue')
-			},
-			{
-				path: 'kanji/kanji-n4',
-				name: 'Kanji-N4',
-				component: () => import( /*webpackChunkName: "about"*/ '../views/Kanji/KanjiN4.vue')
-			},
-			{
-				path: 'kanji/kanji-n5',
-				name: 'Kanji-N5',
-				component: () => import( /*webpackChunkName: "about"*/ '../views/Kanji/KanjiN5.vue')
-			},
-			//=== END ROUTE KANJI ===============================================================================
-			//=== BEGIN DICTIONARY ==============================================================================
-			{
-				path: 'dictionary/list-of-words',
+				path: 'dictionary-n5/list-of-words',
 				name: 'Dictionnary',
-				component: () => import( /*webpackChunkName: "ListOfWords"*/ '../views/Dictionary/ListOfWords.vue')
+				component: () => import( /*webpackChunkName: "ListOfWords"*/ '../views/DictionaryN5/ListOfWords.vue')
 			},
 			{
-				path: 'dictionary/has-kanji',
+				path: 'dictionary-n5/list-of-kanji',
 				name: 'Has-Kanji',
-				component: () => import( /*webpackChunkName: "Practice"*/ '../views/Dictionary/HasKanji.vue')
+				component: () => import( /*webpackChunkName: "ListOfKanji"*/ '../views/DictionaryN5/ListOfKanji.vue')
 			},
 			{
-				path: 'dictionary/new-words',
+				path: 'dictionary-n5/new-words',
 				name: 'New-Words',
-				component: () => import( /*webpackChunkName: "NewWords"*/ '../views/Dictionary/NewWords.vue')
+				component: () => import( /*webpackChunkName: "NewWords"*/ '../views/DictionaryN5/NewWords.vue')
 			},
-			//=== END DICTIONARY ================================================================================
+			{
+				path: 'dictionary-n5/practice-words',
+				name: 'Practice Words',
+				component: () => import( /*webpackChunkName: "PracticeWords"*/ '../views/DictionaryN5/PracticeWords.vue')
+			},
+			{
+				path: 'dictionary-n5/practice-new-words',
+				name: 'Practice New Words',
+				component: () => import( /*webpackChunkName: "PracticeNewWords"*/ '../views/DictionaryN5/PracticeNewWords.vue')
+			},
+			{
+				path: 'dictionary-n5/step-by-step-words',
+				name: 'Practice New Words',
+				component: () => import( /*webpackChunkName: "StepByStepWords"*/ '../views/DictionaryN5/StepByStepWords.vue')
+			},
+			//=== END DICTIONARY N5 ================================================================================
+			//=== BEGIN DICTIONARY N4 ==============================================================================
+			{
+				path: 'dictionary-n4/list-of-words',
+				name: 'Dictionnary',
+				component: () => import( /*webpackChunkName: "ListOfWords"*/ '../views/DictionaryN4/ListOfWords.vue')
+			},
+			{
+				path: 'dictionary-n4/list-of-kanji',
+				name: 'Has-Kanji',
+				component: () => import( /*webpackChunkName: "ListOfKanji"*/ '../views/DictionaryN4/ListOfKanji.vue')
+			},
+			{
+				path: 'dictionary-n4/new-words',
+				name: 'New-Words',
+				component: () => import( /*webpackChunkName: "NewWords"*/ '../views/DictionaryN4/NewWords.vue')
+			},
+			{
+				path: 'dictionary-n4/practice-words',
+				name: 'Practice Words',
+				component: () => import( /*webpackChunkName: "PracticeWords"*/ '../views/DictionaryN4/PracticeWords.vue')
+			},
+			{
+				path: 'dictionary-n4/practice-new-words',
+				name: 'Practice New Words',
+				component: () => import( /*webpackChunkName: "PracticeNewWords"*/ '../views/DictionaryN4/PracticeNewWords.vue')
+			},
+			{
+				path: 'dictionary-n4/step-by-step-words',
+				name: 'Practice New Words',
+				component: () => import( /*webpackChunkName: "StepByStepWords"*/ '../views/DictionaryN4/StepByStepWords.vue')
+			},
+			//=== END DICTIONARY N4 ================================================================================
+			//=== BEGIN DICTIONARY N4 ==============================================================================
+			{
+				path: 'dictionary-n3/list-of-words',
+				name: 'Dictionnary',
+				component: () => import( /*webpackChunkName: "ListOfWords"*/ '../views/DictionaryN3/ListOfWords.vue')
+			},
+			{
+				path: 'dictionary-n3/list-of-kanji',
+				name: 'Has-Kanji',
+				component: () => import( /*webpackChunkName: "ListOfKanji"*/ '../views/DictionaryN3/ListOfKanji.vue')
+			},
+			{
+				path: 'dictionary-n3/new-words',
+				name: 'New-Words',
+				component: () => import( /*webpackChunkName: "NewWords"*/ '../views/DictionaryN3/NewWords.vue')
+			},
+			{
+				path: 'dictionary-n3/practice-words',
+				name: 'Practice Words',
+				component: () => import( /*webpackChunkName: "PracticeWords"*/ '../views/DictionaryN3/PracticeWords.vue')
+			},
+			{
+				path: 'dictionary-n3/practice-new-words',
+				name: 'Practice New Words',
+				component: () => import( /*webpackChunkName: "PracticeNewWords"*/ '../views/DictionaryN3/PracticeNewWords.vue')
+			},
+			{
+				path: 'dictionary-n3/step-by-step-words',
+				name: 'Practice New Words',
+				component: () => import( /*webpackChunkName: "StepByStepWords"*/ '../views/DictionaryN3/StepByStepWords.vue')
+			},
+			//=== END DICTIONARY N4 ================================================================================
 			//=== BEGIN QUIZ ====================================================================================
 			{
 				path: 'quiz/number',
 				name: 'Number',
 				component: () => import( /*webpackChunkName: "Number"*/ '../views/Quiz/Number.vue')
-			},
-			{
-				path: 'quiz/practice-words',
-				name: 'Practice Words',
-				component: () => import( /*webpackChunkName: "Practice"*/ '../views/Quiz/PracticeWords.vue')
-			},
-			{
-				path: 'quiz/practice-new-words',
-				name: 'Practice New Words',
-				component: () => import( /*webpackChunkName: "Practice"*/ '../views/Quiz/PracticeNewWords.vue')
-			},
-			{
-				path: 'quiz/step-by-step-words',
-				name: 'Practice New Words',
-				component: () => import( /*webpackChunkName: "Practice"*/ '../views/Quiz/StepByStepWords.vue')
-			},
-			{
-				path: 'quiz/hiragana-katakana',
-				name: 'Dictionnary',
-				component: () => import( /*webpackChunkName: "HiraganaKatakana"*/ '../views/Quiz/HiraganaKatakana.vue')
-			},
-			{
-				path: 'quiz/vocabulary',
-				name: 'Has-Kanji',
-				component: () => import( /*webpackChunkName: "Vocabulary"*/ '../views/Quiz/Vocabulary.vue')
 			},
 			//=== END QUIZ ======================================================================================
 		]

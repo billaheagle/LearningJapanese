@@ -1,15 +1,6 @@
 export default {
 	namespaced: true,
 	state: {
-		noun: [
-
-		],
-		adjective: [
-
-		],
-		verb: [
-
-		],
 		dictionary: [
 			//=== START HAS KANJI ==================================================================================
 			{kanji: '私', spell: 'わたし',mean: ['Saya', 'Aku'], note: ''},

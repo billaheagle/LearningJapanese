@@ -28,13 +28,13 @@
 		},
 		data: () => ({
 			text: {
-				title: 'List of Words',
+				title: 'New Vocabulary',
 			},
 		}),
 		computed: {
 			...mapGetters({
-				dictionary: 'words/getDictionary',
-				dictionaryLength: 'words/getDictionaryLength',
+				dictionary: 'wordsN5/getNewDictionary',
+				dictionaryLength: 'wordsN5/getNewDictionaryLength',
 			}),
 		},
 		methods: {

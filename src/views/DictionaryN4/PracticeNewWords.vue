@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<v-card outlined>
-			<v-card-title><h2>{{text.title}} | Step {{text.step}}</h2></v-card-title>
+			<v-card-title><h2>{{text.title}} ({{dictLength}})</h2></v-card-title>
 			<v-card-text class="mb-n4" v-if="state.start">
 				<v-row>
 					<v-col cols="3" v-for="(item, i) in dictionary" :key="i">
@@ -9,7 +9,7 @@
 							<v-card-text class="text-center">
 								<h1 class="black--text">{{kanji(item)}}</h1>
 								<v-divider class="my-2" />
-								<h3 class="primary--text mb-n2" v-if="state.finish">{{item.spell}}</h3>
+								<h3 class="primary--text mb-n2" v-if="showSpell">{{item.spell}}</h3>
 								<v-text-field class="my-n2" v-model="answer[i]" :success-messages="checkSuccess(i)" :error-messages="checkError(i)" :readonly="state.finish"></v-text-field>
 							</v-card-text>
 						</v-card>
@@ -17,9 +17,12 @@
 				</v-row>
 			</v-card-text>
 			<v-card-actions v-if="!state.start">
+				<v-switch v-model="showSpell" label="Show Spell" class="mx-auto"></v-switch>
+			</v-card-actions>
+			<v-card-actions v-if="!state.start">
 				<v-btn block color="success" @click="start">{{text.button}}</v-btn>
 			</v-card-actions>
-			<v-card-actions v-if="state.start && !state.finish">
+			<v-card-actions v-if="state.start && !state.finish" >
 				<v-btn block color="success" @click="check" :disabled="!checkAns">{{text.button2}}</v-btn>
 			</v-card-actions>
 			<v-card-actions v-if="state.start">
@@ -55,12 +58,12 @@
 				trueAns: 0,
 			},
 			text: {
-				title: 'Step by Step Words',
+				title: 'Practice New Words',
 				button: 'Start',
 				button2: 'Check',
 				button3: 'Reload',
-				step : '5',
 			},
+			showSpell: false,
 			answer: [],
 			dictionary: []
 		}),
@@ -69,8 +72,8 @@
 		},
 		computed: {
 			...mapGetters({
-				dict: 'words/getDictionary',
-				dictLength: 'words/getDictionaryLength',
+				dict: 'wordsN4/getNewDictionary',
+				dictLength: 'wordsN4/getNewDictionaryLength',
 			}),
 			score() {
 				return Math.round(this.state.trueAns / this.dictionary.length * 100)
@@ -92,7 +95,7 @@
 			start() {
 				this.state.start = !this.state.start
 				this.text.button = "Check"
-				this.dictionary = this.get100(this.dictionary)
+				this.dictionary = this.suffle(this.dictionary)
 			},
 			check() {
 				this.state.finish = !this.state.finish
@@ -104,13 +107,7 @@
 						}
 					}
 				} 
-			},
-			get100(arr) {
-				let newArray = []
-				for(let i = 400; i < 500; i++){
-					newArray.push(arr[i])
-				}
-				return this.suffle(newArray)
+				this.showSpell = true
 			},
 			suffle(arr) {
 				let suffleArray = arr
@@ -127,6 +124,7 @@
 				this.text.button = "Start"
 				this.state.trueAns = 0
 				this.state.start = !this.state.start
+				this.showSpell = false
 				if(this.state.finish) this.state.finish = !this.state.finish
 			},
 			checkSuccess(i) {

@@ -41,7 +41,7 @@
 		},
 		data: () => ({
 			text: {
-				title: 'List of Words has Kanji',
+				title: 'List of Kanji',
 				button: 'Start',
 				button2: 'Show Kanji',
 				button3: 'Suffle Words'
@@ -58,8 +58,8 @@
 		},
 		computed: {
 			...mapGetters({
-				dict: 'words/getHasKanji',
-				dictionaryLength: 'words/getHasKanjiLength',
+				dict: 'wordsN4/getHasKanji',
+				dictionaryLength: 'wordsN4/getHasKanjiLength',
 			}),
 		},
 		methods: {

@@ -68,8 +68,8 @@
 		},
 		computed: {
 			...mapGetters({
-				dict: 'words/getDictionary',
-				dictLength: 'words/getDictionaryLength',
+				dict: 'wordsN5/getDictionary',
+				dictLength: 'wordsN5/getDictionaryLength',
 			}),
 			score() {
 				return Math.round(this.state.trueAns / this.dictionary.length * 100)

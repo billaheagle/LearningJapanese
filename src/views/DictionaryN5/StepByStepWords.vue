@@ -59,7 +59,7 @@
 				button: 'Start',
 				button2: 'Check',
 				button3: 'Reload',
-				step : 1,
+				step : 5
 			},
 			answer: [],
 			dictionary: []

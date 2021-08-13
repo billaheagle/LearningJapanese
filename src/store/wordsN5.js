@@ -12,7 +12,7 @@ export default {
 			{kanji: '先生', spell: 'せんせい', mean: ['Guru', 'Dosen'], note: ''},
 			{kanji: '答え', spell: 'こたえ', mean: ['Jawaban'], note: ''},
 			{kanji: '学生', spell: 'がくせい', mean: ['Murid', 'Siswa'], note: ''},
-			{kanji: '会社員', spell: 'かいしゃいｎ', mean: ['Pegawai', 'Karyawan'], note: ''},
+			{kanji: '会社員', spell: 'かいしゃいん', mean: ['Pegawai', 'Karyawan'], note: ''},
 			{kanji: '練習', spell: 'れんしゅう', mean: ['Latihan'], note: ''},
 			{kanji: '宿題', spell: 'しゅくだい', mean: ['PR', 'Pekerjaan Rumah'], note: ''},
 			{kanji: '大学', spell: 'だいがっこう', mean: ['Kampus', 'Universitas'], note: ''},
